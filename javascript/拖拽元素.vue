@@ -55,16 +55,23 @@ export default {
       const mouseMoveX = e.pageX
       const mouseMoveY = e.pageY
 
+      // 计算后的位置
       const left = parseInt(mouseMoveX) - parseInt(this.mouseDownX) + this.initX
       const top = parseInt(mouseMoveY) - parseInt(this.mouseDownY) + this.initY
 
-      if(left > 0 && left <= parent.offsetWidth - target.offsetWidth) {
+      // 设置x边界
+      if (left < 0) {
+        target.style.left = 0
+      } else if (left <= parent.offsetWidth - target.offsetWidth) {
         target.style.left = left + 'px'
       } else {
-        target.style.top = parent.offsetWidth - target.offsetWidth + 'px'
+        target.style.left = parent.offsetWidth - target.offsetWidth + 'px'
       }
 
-      if (top > 0 && top <= parent.offsetHeight - target.offsetHeight) {
+      // 设置y边界
+      if (top < 0) {
+        target.style.top = 0
+      } else if (top <= parent.offsetHeight - target.offsetHeight) {
         target.style.top = top + 'px'
       } else {
         target.style.top = parent.offsetHeight - target.offsetHeight + 'px'
